@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Screen Capture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Capture Full Screen and Download</h1>
+
+    <button id="capture-button">Capture Full Screen</button>
+
+    <div id="output"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        document.getElementById('capture-button').addEventListener('click', function () {
+            html2canvas(document.body).then(function (canvas) {
+                // Convert the canvas to an image URL
+                var imageURL = canvas.toDataURL("image/png");
+
+                // Create a link element to download the image
+                var downloadLink = document.createElement('a');
+                downloadLink.href = imageURL;
+                downloadLink.download = 'screenshot.png';
+
+                // Simulate a click on the link to trigger the download
+                downloadLink.click();
+            });
+        });
+    </script>
+
+</body>
+</html>
